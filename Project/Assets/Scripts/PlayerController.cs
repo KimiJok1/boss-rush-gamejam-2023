@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 6.0f;
+    [Header("Movement")]
+    [SerializeField]private float speed = 6.0f;
     private float horizontalInput;
 
-    public float jumpForce = 4.0f;
-    public float gravityModifier = 1.0f;
+    [Header("Jumping")]
+    [SerializeField]private float jumpForce = 4.0f;
+    [SerializeField]private float gravityModifier = 1.0f;
     private bool isOnGround = false;
 
-    public float wallJumpForce = 4.0f;
+    [SerializeField]private float wallJumpForce = 4.0f;
     private bool isOnWall = false;
 
-    public float targetRange = 2.0f;
+    [Header("Aiming")]
+    [SerializeField]private float targetRange = 2.0f;
 
     private GameObject sprite;
 

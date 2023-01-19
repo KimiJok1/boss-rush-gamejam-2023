@@ -9,6 +9,10 @@ using UnityEngine.SceneManagement;
 using System.Text;
 using TMPro;
 
+/*
+    Unity has all of this built-in
+*/
+
 public class DebugStats : MonoBehaviour
 {
     string _statsText;
@@ -42,4 +46,5 @@ public class DebugStats : MonoBehaviour
     {
         _totalReservedMemoryRecorder.Dispose();
     }
+
 }
