@@ -19,13 +19,14 @@ public class PlayerController : MonoBehaviour
     [Header("Aiming")]
     [SerializeField]private float targetRange = 2.0f;
 
-    private GameObject sprite;
+    [Header("Sprites")]
+    [SerializeField]private GameObject sprite;
+    [SerializeField]private GameObject target;
 
     void Start()
     {
         // gravity
         Physics.gravity *= gravityModifier;
-        sprite = GameObject.Find("Sprite");
     }
 
     void Update()
@@ -53,8 +54,22 @@ public class PlayerController : MonoBehaviour
         mousePos.z = 0;
         mousePos = sprite.transform.position + (mousePos - sprite.transform.position).normalized * targetRange;
         
-        sprite.transform.Find("Target").transform.position = mousePos;
-        sprite.transform.Find("Target").transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        target.transform.position = mousePos;
+        target.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        
+        // mouse button click
+        if (Input.GetMouseButtonDown(0))
+        {
+            // find enemies that collide with target
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(target.transform.position, 0.5f);
+            foreach (Collider2D enemy in enemies)
+            {
+                if (enemy.gameObject.CompareTag("Enemy"))
+                {
+                    enemy.gameObject.GetComponent<EnemyController>().OnHit();
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
