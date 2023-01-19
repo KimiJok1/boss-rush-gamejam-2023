@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine;
 using Unity.Profiling;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +14,9 @@ public class DebugStats : MonoBehaviour
     string _statsText;
     ProfilerRecorder _totalReservedMemoryRecorder;
 
+    public float updateTime = 1.1f;
+    public float updateFrequency = 1f;
+
     void Start()
     {
          _totalReservedMemoryRecorder = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Reserved Memory");
@@ -21,6 +24,12 @@ public class DebugStats : MonoBehaviour
 
     void Update()
     {
+        updateTime += Time.deltaTime * 100;
+        if (updateTime < updateFrequency)
+            return;
+
+        updateTime = 0f;
+
         var sb = new StringBuilder(500);
         if (_totalReservedMemoryRecorder.Valid)
             sb.AppendLine($"Memory: {_totalReservedMemoryRecorder.LastValue / 1024 / 1024} MB");
