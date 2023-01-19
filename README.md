@@ -10,3 +10,5 @@ The project was made by:
 - Roni / Roni (Programming, ideas)
 - Sardorbek / RubenOdd (Art, ideas)
 
+Sources:
+- Font: https://fonts.google.com/specimen/Walter+Turncoat
