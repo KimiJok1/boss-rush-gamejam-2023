@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Im not fixing the 100 merge conflicts that come with user settings 
+/UserSettings
+
