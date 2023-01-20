@@ -13,11 +13,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float gravityModifier = 1.0f;
     private bool isOnGround = false;
 
-    [SerializeField]private float wallJumpForce = 4.0f;
-    private bool isOnWall = false;
-
     [Header("Aiming")]
     [SerializeField]private float targetRange = 2.0f;
+
+    [Header("Dashing")]
+    [SerializeField]private float dashForce = 4.0f;
 
     [Header("Sprites")]
     [SerializeField]private GameObject sprite;
@@ -39,11 +39,9 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
         }
-
-        if (isOnWall)
-        {
-            //GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -speed);
-        }
+        
+        // dashing
+        // TODO: add it
 
         // get mouse position
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -72,17 +70,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool checkDir = false;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy"))
         {
-            isOnGround = true;
-            isOnWall = false;
-        }
+            checkDir = true;
+            ContactPoint2D[] allPoints = new ContactPoint2D[collision.contactCount];
+            collision.GetContacts(allPoints);
 
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            isOnWall = true;
+            foreach (var i in allPoints)
+                if (i.point.y > transform.position.y) 
+                    checkDir = false;
+
+            if (checkDir)
+                isOnGround = checkDir;
         }
     }
 }
