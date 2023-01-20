@@ -17,17 +17,16 @@ public class EnemyController : MonoBehaviour
 
     [Header("Sprites")]
     [SerializeField]private GameObject sprite;
-    private GameObject canvas;
+    [SerializeField]private GameObject canvas;
 
     [Header("Stats")]
-    private int health = 100;
     [SerializeField]private int maxHealth = 100;
+    private int health = 100;
 
     void Start()
     {
         // gravity
         Physics.gravity *= gravityModifier;
-        canvas = GameObject.Find("Canvas");
         health = maxHealth;
     }
 
@@ -43,7 +42,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void UpdateUI()
+    private void UpdateUI()
     {
         canvas.transform.Find("Healthbar").GetComponent<Slider>().value = health;
         canvas.transform.Find("HealthText").GetComponent<TextMeshProUGUI>().text = health.ToString() + "/" + maxHealth.ToString();
