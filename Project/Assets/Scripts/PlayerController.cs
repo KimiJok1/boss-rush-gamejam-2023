@@ -5,23 +5,25 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField]private float speed = 6.0f;
+    [SerializeField] private float speed = 6.0f;
     private float horizontalInput;
 
     [Header("Jumping")]
-    [SerializeField]private float jumpForce = 4.0f;
-    [SerializeField]private float gravityModifier = 1.0f;
+    [SerializeField] private float jumpForce = 4.0f;
+    [SerializeField] private float gravityModifier = 1.0f;
+    [SerializeField] private int extraJumps = 1;
+    private int jumpsLeft;
     private bool isOnGround = false;
 
     [Header("Aiming")]
-    [SerializeField]private float targetRange = 2.0f;
+    [SerializeField] private float targetRange = 2.0f;
 
     [Header("Dashing")]
-    [SerializeField]private float dashForce = 4.0f;
+    [SerializeField] private float dashForce = 4.0f;
 
     [Header("Sprites")]
-    [SerializeField]private Transform sprite;
-    [SerializeField]private Transform target;
+    [SerializeField] private Transform sprite;
+    [SerializeField] private Transform target;
 
     private Rigidbody2D rb;
 
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
         // gravity
         Physics.gravity *= gravityModifier;
         rb = GetComponent<Rigidbody2D>();
+        jumpsLeft = extraJumps;
     }
 
     void Update()
@@ -37,10 +40,11 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
         {
             rb.velocity = Vector3.up * jumpForce;
-            isOnGround = false;
+            // isOnGround = false;
+            --jumpsLeft;
         }
         
         // dashing
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour
         target.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         
         // mouse button click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1"))
         {
             // find enemies that collide with target
             Collider2D[] enemies = Physics2D.OverlapCircleAll(target.position, 0.5f);
@@ -86,8 +90,12 @@ public class PlayerController : MonoBehaviour
                 if (i.point.y > transform.position.y) 
                     checkDir = false;
 
-            if (checkDir)
-                isOnGround = checkDir;
+            if (checkDir) {
+                // isOnGround = checkDir;
+                jumpsLeft = extraJumps;
+            }
+            
+
         }
     }
 }

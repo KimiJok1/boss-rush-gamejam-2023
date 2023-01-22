@@ -3086,6 +3086,7 @@ MonoBehaviour:
   speed: 8
   jumpForce: 8
   gravityModifier: 1
+  extraJumps: 2
   targetRange: 1.5
   dashForce: 4
   sprite: {fileID: 833019832}
