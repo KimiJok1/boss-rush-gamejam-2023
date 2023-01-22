@@ -20,23 +20,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float dashForce = 4.0f;
 
     [Header("Sprites")]
-    [SerializeField]private GameObject sprite;
-    [SerializeField]private GameObject target;
+    [SerializeField]private Transform sprite;
+    [SerializeField]private Transform target;
+
+    private Rigidbody2D rb;
 
     void Start()
     {
         // gravity
         Physics.gravity *= gravityModifier;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalInput * speed, GetComponent<Rigidbody2D>().velocity.y);
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = Vector3.up * jumpForce;
             isOnGround = false;
         }
         
@@ -45,26 +48,26 @@ public class PlayerController : MonoBehaviour
 
         // get mouse position
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 objectPos = Camera.main.WorldToScreenPoint(sprite.transform.position);
-        Vector3 dir = mousePos - sprite.transform.position;
+        Vector3 objectPos = Camera.main.WorldToScreenPoint(sprite.position);
+        Vector3 dir = mousePos - sprite.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         mousePos.z = 0;
-        mousePos = sprite.transform.position + (mousePos - sprite.transform.position).normalized * targetRange;
+        mousePos = sprite.position + (mousePos - sprite.position).normalized * targetRange;
         
-        target.transform.position = mousePos;
-        target.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        target.position = mousePos;
+        target.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         
         // mouse button click
         if (Input.GetMouseButtonDown(0))
         {
             // find enemies that collide with target
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(target.transform.position, 0.5f);
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(target.position, 0.5f);
             foreach (Collider2D enemy in enemies)
             {
-                if (enemy.gameObject.CompareTag("Enemy"))
+                if (enemy.CompareTag("Enemy"))
                 {
-                    enemy.gameObject.GetComponent<EnemyController>().OnHit();
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(10);
                 }
             }
         }
