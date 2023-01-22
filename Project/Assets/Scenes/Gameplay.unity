@@ -3088,8 +3088,8 @@ MonoBehaviour:
   gravityModifier: 1
   targetRange: 1.5
   dashForce: 4
-  sprite: {fileID: 833019829}
-  target: {fileID: 747110584}
+  sprite: {fileID: 833019832}
+  target: {fileID: 747110585}
 --- !u!61 &1548751455
 BoxCollider2D:
   m_ObjectHideFlags: 0
