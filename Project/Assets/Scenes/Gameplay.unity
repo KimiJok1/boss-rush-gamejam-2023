@@ -3088,7 +3088,7 @@ MonoBehaviour:
   gravityModifier: 1
   extraJumps: 2
   targetRange: 1.5
-  dashForce: 4
+  dashForce: 20
   sprite: {fileID: 833019832}
   target: {fileID: 747110585}
 --- !u!61 &1548751455
