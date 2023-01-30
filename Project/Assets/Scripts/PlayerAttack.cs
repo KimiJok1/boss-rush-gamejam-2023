@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private float VerticalDirection;
+    [SerializeField] private Animator animator;
 
     void Update()
     {
@@ -16,6 +17,11 @@ public class PlayerAttack : MonoBehaviour
         else if (VerticalDirection < 0)
         {
             Debug.Log("Down");
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.SetTrigger("Attack1");
         }
     }
 }

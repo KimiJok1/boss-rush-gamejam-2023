@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 4.0f;
     [SerializeField] private float gravityModifier = 1.0f;
     [SerializeField] private int extraJumps = 1;
+    [SerializeField] private GameObject JumpEffect;
     private int jumpsLeft;
     private bool isOnGround = false;
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Transform sprite;
     [SerializeField] private Transform target;
+    [SerializeField] private Animator animator;
 
     private Rigidbody2D rb;
 
@@ -39,12 +41,24 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
-
+        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        
         if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
         {
             rb.velocity = Vector3.up * jumpForce;
+            Instantiate(JumpEffect, transform.position, Quaternion.identity);
             // isOnGround = false;
             --jumpsLeft;
+        }
+
+        //flip sprite
+        if (horizontalInput > 0)
+        {
+            sprite.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (horizontalInput < 0)
+        {
+            sprite.localEulerAngles = new Vector3(0, -180, 0);
         }
         
         // dashing
