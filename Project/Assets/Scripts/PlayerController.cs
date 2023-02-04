@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Transform sprite;
     [SerializeField] private Transform target;
-    [SerializeField] private Animator animator;
+    // [SerializeField] private Animator animator;
 
     private Rigidbody2D rb;
 
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
-        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        // animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         
         if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
         {
