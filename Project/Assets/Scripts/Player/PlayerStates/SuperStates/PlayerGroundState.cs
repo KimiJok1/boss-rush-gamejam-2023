@@ -1,11 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Player;
 
 public class PlayerGroundState : State
 {
     protected int xInput;
     protected bool jumpInput;
+
+
+    protected PlayerController PlayerController 
+    {
+        get
+        {
+            if(playerController == null)
+            {
+                playerController = player.GetComponent<PlayerController>();
+            }
+            return playerController;
+        }
+    }
+
+    private PlayerController playerController;
+
     public PlayerGroundState(Player player, StateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }

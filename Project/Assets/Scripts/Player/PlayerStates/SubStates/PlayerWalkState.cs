@@ -22,11 +22,16 @@ public class PlayerWalkState : PlayerGroundState
     {
         base.LUpdate();
 
-        // player.SetVelocityX(xInput * playerData.movementSpeed);
+        PlayerController.SetVelocityX(xInput * playerData.movementSpeed);
 
         if (xInput == 0)
         {
             stateMachine.ChangeState(player.IdleState);
         }
+    }
+
+    public override void PUpdate()
+    {
+        base.PUpdate();
     }
 }

@@ -53,4 +53,6 @@ public class InputHandler : MonoBehaviour
         InputX = (int)movementInput.x;
         InputY = (int)movementInput.y;
     }
+
+    public void UseJump() => jumpInput = false;
 }

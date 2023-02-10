@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public InputHandler inputHandler;
     public GameObject sprite;
 
+    [SerializeField] private PlayerData playerData;
+
     #endregion
 
     private Weapon weapon;
@@ -32,9 +34,9 @@ public class Player : MonoBehaviour
         weapon = GetComponentInChildren<Weapon>();
 
 
-        primaryAttackState = new PlayerCombatState(this, stateMachine, null, "Attack", weapon);
-        IdleState = new PlayerIdleState(this, stateMachine, null, "Idle");
-        WalkState = new PlayerWalkState(this, stateMachine, null, "Walk");
+        primaryAttackState = new PlayerCombatState(this, stateMachine, playerData, "Attack", weapon);
+        IdleState = new PlayerIdleState(this, stateMachine, playerData, "Idle");
+        WalkState = new PlayerWalkState(this, stateMachine, playerData, "Walk");
          
     }
 
