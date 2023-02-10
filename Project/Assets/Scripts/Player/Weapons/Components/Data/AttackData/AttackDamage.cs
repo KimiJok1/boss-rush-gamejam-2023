@@ -4,8 +4,8 @@ using UnityEngine;
 namespace Game.Weapons.Components.ComponentData
 {
     [System.Serializable]
-    public class AttackData
+    public class AttackDamage : AttackData
     {
-        [SerializeField] private string Name;
+        [field: SerializeField] public int Damage { get; private set; }
     }
 }

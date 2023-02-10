@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDamageable
 {
     private int health = 100;
     private float previousHealth = 100;
@@ -17,6 +17,17 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private UnityEvent OnDeath;
 
     private float LastHitTime = 0.0f;
+
+    public void TakeDamage(int damage)
+    {
+        previousHealth = health;
+        health -= damage;
+        LastHitTime = 1.0f;
+
+        UpdateUI();
+        if (health <= 0)
+            OnDeath.Invoke();
+    }
 
     void Start()
     {
@@ -55,14 +66,5 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
-    {
-        previousHealth = health;
-        health -= damage;
-        LastHitTime = 1.0f;
 
-        UpdateUI();
-        if (health <= 0)
-            OnDeath.Invoke();
-    }
 }

@@ -12,18 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7c11c9c908b7f429248e2368839a09, type: 3}
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
-  <maxComboCount>k__BackingField: 2
+  <maxComboCount>k__BackingField: 1
   comboResetTime: 0
   <components>k__BackingField:
   - rid: 8110958854900547584
+  - rid: 8110958985566748672
+  - rid: 8110958985566748673
   references:
     version: 2
     RefIds:
     - rid: 8110958854900547584
       type: {class: MovementData, ns: Game.Weapons.Components.ComponentData, asm: Assembly-CSharp}
       data:
+        Name: Movement
         <AttackData>k__BackingField:
-        - <Direction>k__BackingField: {x: 1, y: 0}
+        - Name: 
+          <Direction>k__BackingField: {x: 1, y: 0}
           <velocity>k__BackingField: 3
-        - <Direction>k__BackingField: {x: 1, y: 0}
-          <velocity>k__BackingField: 5
+    - rid: 8110958985566748672
+      type: {class: ActionHitBoxData, ns: Game.Weapons.Components.ComponentData, asm: Assembly-CSharp}
+      data:
+        Name: Hitbox
+        <AttackData>k__BackingField:
+        - Name: Hit1
+          Debug: 1
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.12
+            y: -0.64
+            width: 1.22
+            height: 1.45
+        <HitLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 64
+    - rid: 8110958985566748673
+      type: {class: DamageData, ns: Game.Weapons.Components.ComponentData, asm: Assembly-CSharp}
+      data:
+        Name: Damage
+        <AttackData>k__BackingField:
+        - Name: Attack 1
+          <Damage>k__BackingField: 25

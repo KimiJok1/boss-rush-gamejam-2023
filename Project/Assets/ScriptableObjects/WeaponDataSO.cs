@@ -19,4 +19,10 @@ public class WeaponDataSO : ScriptableObject
         [ContextMenu("Add Movement Data")]
         private void AddMovementData() => components.Add(new MovementData());
 
+        [ContextMenu("Add Action Hit Box Data")]
+        private void AddActionHitBoxData() => components.Add(new ActionHitBoxData());
+
+        [ContextMenu("Add Damage Data")]
+        private void AddDamageData() => components.Add(new DamageData());
+
 }

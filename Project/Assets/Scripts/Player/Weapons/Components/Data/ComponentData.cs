@@ -8,6 +8,7 @@ namespace Game.Weapons.Components.ComponentData
     [System.Serializable]
     public class ComponentData
     {
+        [field: SerializeField] private string Name;
 
     }
 
