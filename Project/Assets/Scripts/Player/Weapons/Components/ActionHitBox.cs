@@ -10,8 +10,6 @@ namespace Game.Weapons.Components.ComponentData
 
         private PlayerController pc;
 
-        private PlayerController PlayerController => pc != null ? pc : pc = GetComponent<PlayerController>();
-
         private Vector2 offset;
 
         private Collider2D[] hitColliders;

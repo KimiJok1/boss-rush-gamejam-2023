@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Player;
 
 namespace Game.Weapons.Components
 {
@@ -12,6 +13,8 @@ namespace Game.Weapons.Components
         protected bool isAttackActive;
 
         protected AnimationEventHandler animationEventHandler => weapon.animEventHandler;
+
+        protected PlayerController PlayerController => weapon.playerController;
 
 
         protected virtual void Awake()

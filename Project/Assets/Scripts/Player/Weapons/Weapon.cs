@@ -1,6 +1,7 @@
 using UnityEngine;
 using Common.Utilities;
 using System;
+using Game.Player;
 
 namespace Game.Weapons
 {
@@ -18,8 +19,11 @@ namespace Game.Weapons
         }
 
         private Animator anim;
+        [SerializeField]
         private GameObject sprite;
         public AnimationEventHandler animEventHandler { get; private set; }
+
+        public PlayerController playerController { get; private set; }
 
         private int comboCount = 0;
 
@@ -40,7 +44,8 @@ namespace Game.Weapons
         private void Awake()
         {
             timer = new Timer(comboResetTime);
-            sprite = transform.Find("Sprite").gameObject;
+            // sprite = transform.Find("Sprite").gameObject;
+            playerController = GetComponentInParent<PlayerController>();
             anim = sprite.GetComponent<Animator>();
             animEventHandler = sprite.GetComponent<AnimationEventHandler>();
         }

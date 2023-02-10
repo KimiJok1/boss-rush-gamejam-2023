@@ -8,9 +8,6 @@ namespace Game.Weapons.Components
 {
     public class Movement : WeaponComponent<MovementData, AttackMovement>
     {
-        private PlayerController pc;
-
-        private PlayerController PlayerController => pc != null ? pc : pc = GetComponent<PlayerController>();
         
         private void HandleStartMovement()
         {
