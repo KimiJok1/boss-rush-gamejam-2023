@@ -8,7 +8,7 @@ using TMPro;
 public class EnemyHealth : MonoBehaviour
 {
     private int health = 100;
-    private int previousHealth = 100;
+    private float previousHealth = 100;
     [SerializeField] private int maxHealth = 100;
 
     [SerializeField] private Slider[] healthBar;
@@ -41,7 +41,8 @@ public class EnemyHealth : MonoBehaviour
         {
             if(previousHealth > health)
             {
-                healthBar[1].value -= .1f;
+                healthBar[1].value -= .1f; 
+                previousHealth = healthBar[1].value;
             }
         }
     }
