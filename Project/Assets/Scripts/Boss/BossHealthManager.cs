@@ -14,7 +14,6 @@ public class BossHealthManager : MonoBehaviour
     void Start()
     {
         SetMaxHealth(100);
-        SetHealth(80);
     }
 
     void Update()
@@ -32,7 +31,7 @@ public class BossHealthManager : MonoBehaviour
         }
     }
 
-    void SetMaxHealth(int _health)
+    public void SetMaxHealth(int _health)
     {
         previousHealth = _health;
         health = _health;
@@ -43,11 +42,16 @@ public class BossHealthManager : MonoBehaviour
         }
     }
 
-    void SetHealth(int _health)
+    public void SetHealth(int _health)
     {
         LastHitTime = 1.0f;
         previousHealth = health;
         health = _health;
         healthBar[0].value = _health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        SetHealth(health - damage);
     }
 }

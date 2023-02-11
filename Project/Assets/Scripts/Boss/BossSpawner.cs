@@ -15,7 +15,8 @@ public class BossSpawner : MonoBehaviour
     void SpawnBoss()
     {
         int randomIndex = Random.Range(0, bossPrefabs.Length);
-        Instantiate(bossPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
+        var boss = Instantiate(bossPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
+        boss.GetComponent<BossController>().healthManager = GetComponent<BossHealthManager>();
         
     }
 }

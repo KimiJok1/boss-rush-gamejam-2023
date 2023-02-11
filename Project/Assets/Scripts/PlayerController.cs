@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
         float rawHorizontalInput = Input.GetAxisRaw("Horizontal");
         
         if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
@@ -84,31 +83,6 @@ public class PlayerController : MonoBehaviour
         // dashing
         // TODO: add it
 
-        // get mouse position
-        // Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Vector3 objectPos = Camera.main.WorldToScreenPoint(sprite.position);
-        // Vector3 dir = mousePos - sprite.position;
-        // float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        // mousePos.z = 0;
-        // mousePos = sprite.position + (mousePos - sprite.position).normalized * targetRange;
-        
-        // target.position = mousePos;
-        // target.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-        // // mouse button click
-        // if (Input.GetButtonDown("Fire1"))
-        // {
-        //     // find enemies that collide with target
-        //     Collider2D[] enemies = Physics2D.OverlapCircleAll(target.position, 0.5f);
-        //     foreach (Collider2D enemy in enemies)
-        //     {
-        //         if (enemy.CompareTag("Enemy"))
-        //         {
-        //             enemy.GetComponent<EnemyHealth>().TakeDamage(10);
-        //         }
-        //     }
-        // }
     }
 
     void flip()

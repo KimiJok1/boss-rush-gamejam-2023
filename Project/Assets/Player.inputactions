@@ -273,6 +273,17 @@
                     "action": "OnAttackInput",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "157fd27c-c92b-4a79-85e7-e22a5d436b99",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OnAttackInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
